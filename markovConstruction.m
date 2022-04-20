@@ -1,8 +1,6 @@
 clear all
 clc
-A = ["Hello"; "Rabbits"];
-B = ["World"];
-%B = [A,B];
+
 
 numOfWords = 10;
 
