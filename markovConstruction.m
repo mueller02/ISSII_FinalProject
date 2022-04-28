@@ -2,9 +2,13 @@ clear all
 clc
 
 b = containers.Map;
-b = generation(b, 'dickens-corpus.txt')
+b = generation(b, 'The Hunger Games.txt')
 b = generation(b, 'Catching Fire.txt')
 b = generation(b, 'MockingJay.txt')
+%b = generation(b, 'dickens-corpus.txt')
+b = generation(b, '(3.2) Mockingjay.txt')
+%b = generation(b, 'obama.txt')
+%b = generation(b, 'mobydick.txt')
 
 analytics(b)
 
@@ -63,6 +67,23 @@ function b = analytics(markovMap)
     end
     mostCommonWords
     mostCommonLengths
-    mostCommonWords = categorical(mostCommonWords)
-    bar(mostCommonWords, mostCommonLengths)
+   
+    for i = 1:length(mostCommonWords)
+        
+        index = find(mostCommonLengths==max(mostCommonLengths));
+        
+        %Place max in ordered array
+        mostCommonLengthsOrdered(i) = mostCommonLengths(index(1));
+        mostCommonWordsOrdered(i) = mostCommonWords(index(1));
+        
+        %Change the the most common length to -1 for thos indices in the
+        %old array
+        mostCommonLengths(index(1)) = -1;
+        
+    
+    end
+    
+    mostCommonWordsOrdered = categorical(mostCommonWordsOrdered);
+    mostCommonWordsOrdered = reordercats(mostCommonWordsOrdered,string(mostCommonWordsOrdered));
+    bar(mostCommonWordsOrdered, mostCommonLengthsOrdered)
 end
