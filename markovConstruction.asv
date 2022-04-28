@@ -2,12 +2,9 @@ clear all
 clc
 
 b = containers.Map;
-b = generation(b, 'dickens-corpus.txt')
+b = generation(b, 'The Hunger Games.txt')
 b = generation(b, 'Catching Fire.txt')
 b = generation(b, 'MockingJay.txt')
-
-analytics(b)
-
 function a = generation(markovMap, filename)
 
 numOfWords = 1000;
@@ -52,17 +49,10 @@ a = markovMap
 end
 
 function b = analytics(markovMap)
-    mostCommonWords = strings(1,100);
-    mostCommonLengths = zeros(1,100);
+    mostCommonWords = strings(10);
+    mostCommonLengths = zeros(10);
     for i = keys(markovMap)
-        if length(markovMap(i{1})) >= min(mostCommonLengths)
-            indices = find(mostCommonLengths==min(mostCommonLengths));
-            mostCommonWords(indices(1)) = i;
-            mostCommonLengths(indices(1)) = length(markovMap(i{1}));
-        end
+        if length(markovMap(i)) >= min(mostCommonLengths)
+            
     end
-    mostCommonWords
-    mostCommonLengths
-    mostCommonWords = categorical(mostCommonWords)
-    bar(mostCommonWords, mostCommonLengths)
 end
